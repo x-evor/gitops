@@ -1,0 +1,19 @@
+---
+- name: Generate DNS records file from template
+  template:
+    src: dns_records.yaml.j2
+    dest: "{{ cloudflare_dns_sync_output }}"
+
+- name: Upload dns_sync.py
+  copy:
+    src: dns_sync.py
+    dest: /tmp/dns_sync.py
+    mode: "0755"
+
+- name: Sync DNS records
+  command: >
+    python3 /tmp/dns_sync.py
+    {{ cloudflare_dns_sync_output }}
+  environment:
+    CLOUDFLARE_API_TOKEN: "{{ cloudflare_api_token }}"
+

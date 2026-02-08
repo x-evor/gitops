@@ -1,0 +1,116 @@
+apiVersion: gitops.svc.plus/v1alpha1
+kind: StackFlow
+metadata:
+  # Stack identifier (used in plans/artifacts).
+  name: svc-plus
+
+global:
+  # Root domain for this business stack.
+  # Runner enforces: every targets[].domains[] must be under this root.
+  domain: svc.plus
+
+  # Declarative provider selector for future dns-apply (no secrets here).
+  dns_provider: cloudflare
+
+  # Default cloud for this stack (future iac-apply/deploy/observe phases).
+  cloud: gcp
+  gcp_project: xzerolab-480008
+
+  # Optional: multi-environment overrides (selected by runner --env).
+  # Today CI only runs plan/validate; env selection is for future expansion.
+  environments:
+    prod:
+      dns_provider: cloudflare
+      cloud: gcp
+      gcp_project: xzerolab-480008
+    dev:
+      dns_provider: cloudflare
+      cloud: gcp
+      gcp_project: xzerolab-480008
+
+  # Source-of-truth repos (informational).
+  gitops: https://github.com/cloud-neutral-toolkit/gitops
+  playbooks: https://github.com/cloud-neutral-toolkit/playbook
+  iac_modules: https://github.com/cloud-neutral-toolkit/iac_modules
+
+targets:
+  # -----------------------------------------
+  # Vercel: www + console
+  # -----------------------------------------
+  - id: vercel-console
+    type: vercel
+    vercel:
+      project_url: https://vercel.com/svc-designs-projects/console-svc-plus
+      team_slug: svc-designs-projects
+      project_slug: console-svc-plus
+    domains:
+      - www.svc.plus
+      - console.svc.plus
+    # Optional env-specific intent (not used by runner yet).
+    environments:
+      dev:
+        domains:
+          - www.dev.svc.plus
+          - console.dev.svc.plus
+    dns:
+      # Default policy: pure DNS. Proxy can be enabled per-record later.
+      records:
+        - name: www
+          type: CNAME
+          value: cname.vercel-dns.com.
+          proxied: false
+        - name: console
+          type: CNAME
+          value: cname.vercel-dns.com.
+          proxied: false
+
+  # -----------------------------------------
+  # GCE vhost: clawdbot
+  # -----------------------------------------
+  - id: clawdbot
+    type: vhost
+    cloud: gcp
+    gcp:
+      project: xzerolab-480008
+      zone: asia-east1-b
+      instance_name: clawdbot-svc-plus
+      console_url: https://console.cloud.google.com/compute/instancesDetail/zones/asia-east1-b/instances/clawdbot-svc-plus?project=xzerolab-480008
+    domains:
+      - clawdbot.svc.plus
+    resources:
+      os: debian-13
+      cpu: 2
+      mem_mib: 4096
+      disk_gb: 50
+    endpoints:
+      # Will be filled by future iac-apply output.
+      public_ipv4: ""
+    dns:
+      records:
+        - name: clawdbot
+          type: A
+          valueFrom: endpoints.public_ipv4
+          proxied: false
+
+  # -----------------------------------------
+  # GCP Cloud Run: accounts
+  # -----------------------------------------
+  - id: accounts
+    type: cloud-run
+    cloud: gcp
+    repo: https://github.com/cloud-neutral-toolkit/accounts.svc.plus
+    gcp:
+      project: xzerolab-480008
+      region: asia-northeast1
+      service: accounts-svc-plus
+      console_url: https://console.cloud.google.com/run/detail/asia-northeast1/accounts-svc-plus/observability/metrics?project=xzerolab-480008
+    domains:
+      - accounts.svc.plus
+    deploy:
+      mode: repo-dispatch
+      repository: cloud-neutral-toolkit/accounts.svc.plus
+      event_type: stackflow.deploy.cloudrun
+    dns:
+      # Cloud Run custom domain mapping needs provider-specific verification records.
+      # Keep explicit records here once known; plan/validate won't apply them.
+      records: []

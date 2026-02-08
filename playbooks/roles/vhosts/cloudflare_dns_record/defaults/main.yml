@@ -1,0 +1,16 @@
+---
+# Required
+cloudflare_dns_domain: ""
+cloudflare_dns_rr: ""
+cloudflare_dns_type: ""
+cloudflare_dns_value: ""
+
+# Optional
+# Cloudflare TTL supports 1 (automatic) or a provider-dependent range.
+cloudflare_dns_ttl: 1
+cloudflare_dns_proxied: false
+cloudflare_dns_priority: null
+
+# Secret (pass via extra-vars / env / vault; never commit real values)
+cloudflare_api_token: ""
+
