@@ -14,7 +14,7 @@ global:
 
   # Default cloud for this stack (future iac-apply/deploy/observe phases).
   cloud: gcp
-  gcp_project: xzerolab-480008
+    project: xzerolab-480008
 
   # Optional: multi-environment overrides (selected by runner --env).
   # Today CI only runs plan/validate; env selection is for future expansion.
