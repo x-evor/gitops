@@ -5,7 +5,7 @@ metadata:
   namespace: platform
 spec:
   interval: 10m0s
-  url: oci://ghcr.io/x-evor/charts/k3s-platform-chart
+  url: oci://ghcr.io/x-evor/k3s-platform-chart
   ref:
     semver: "0.1.0"
   layerSelector:

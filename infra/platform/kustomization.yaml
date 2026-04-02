@@ -4,5 +4,4 @@ resources:
   - repositories.yaml
   - k3s-platform
   - external-secrets
-  - external-dns
   - reloader

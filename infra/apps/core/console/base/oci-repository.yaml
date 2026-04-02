@@ -4,7 +4,7 @@ metadata:
   name: console-chart
 spec:
   interval: 10m0s
-  url: oci://ghcr.io/x-evor/charts/app-service
+  url: oci://ghcr.io/x-evor/app-service
   ref:
     semver: "0.1.0"
   layerSelector:

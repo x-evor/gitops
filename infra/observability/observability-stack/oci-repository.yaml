@@ -5,7 +5,7 @@ metadata:
   namespace: observability
 spec:
   interval: 10m0s
-  url: oci://ghcr.io/x-evor/charts/observability
+  url: oci://ghcr.io/x-evor/observability
   ref:
     semver: "0.1.0"
   layerSelector:
