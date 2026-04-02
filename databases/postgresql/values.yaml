@@ -7,7 +7,7 @@ image:
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
-  - postgresql-ghcr-pull
+  - name: postgresql-ghcr-pull
 
 auth:
   username: postgres
