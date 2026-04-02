@@ -1,13 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: hashicorp
-  namespace: flux-system
-spec:
-  interval: 10m0s
-  url: https://helm.releases.hashicorp.com
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: bitnami
@@ -15,4 +6,3 @@ metadata:
 spec:
   interval: 10m0s
   url: https://charts.bitnami.com/bitnami
-

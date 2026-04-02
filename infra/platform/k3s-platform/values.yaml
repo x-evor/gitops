@@ -1,0 +1,111 @@
+namespaces:
+  platform: platform
+  vault: extsvc
+
+components:
+  caddy:
+    enabled: true
+    releaseName: caddy
+    sourceRef:
+      kind: HelmRepository
+      name: caddy-ingress
+      namespace: flux-system
+    chart:
+      name: caddy-ingress-controller
+      version: ">=1.0.0 <2.0.0"
+    values:
+      ingressController:
+        enabled: true
+      ingressClass:
+        create: true
+        name: caddy
+        default: false
+      service:
+        type: LoadBalancer
+  apisix:
+    enabled: true
+    releaseName: apisix
+    sourceRef:
+      kind: HelmRepository
+      name: apisix
+      namespace: flux-system
+    chart:
+      name: apisix
+      version: ">=2.7.0 <3.0.0"
+    values:
+      etcd:
+        enabled: false
+      ingress-controller:
+        enabled: false
+      dashboard:
+        enabled: false
+      gateway:
+        type: ClusterIP
+      apisix:
+        deployment:
+          role: traditional
+          roleTraditional:
+            configProvider: yaml
+        standalone:
+          enabled: true
+        admin:
+          enabled: false
+  vault:
+    enabled: true
+    releaseName: vault
+    sourceRef:
+      kind: HelmRepository
+      name: hashicorp
+      namespace: flux-system
+    chart:
+      name: vault
+      version: ">=0.28.0 <1.0.0"
+    values:
+      injector:
+        enabled: false
+      server:
+        standalone:
+          enabled: false
+        dataStorage:
+          enabled: true
+          size: 8Gi
+        ha:
+          enabled: true
+          replicas: 1
+          raft:
+            enabled: true
+            setNodeId: true
+        service:
+          enabled: true
+
+apisixIngress:
+  enabled: true
+  name: apisix-gateway
+  namespace: platform
+  className: caddy
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: api.svc.plus,api-pre.svc.plus
+  tls:
+    secretName: apisix-gateway-tls
+    hosts:
+      - api.svc.plus
+      - api-pre.svc.plus
+  hosts:
+    - host: api.svc.plus
+      serviceName: apisix-gateway
+      servicePort: 80
+    - host: api-pre.svc.plus
+      serviceName: apisix-gateway
+      servicePort: 80
+
+vaultBootstrap:
+  enabled: true
+  image: hashicorp/vault:1.16.3
+  serviceAccountName: vault-bootstrap
+  cloudflareSecretName: vault-bootstrap
+  cloudflareSecretKey: cloudflareApiToken
+  rootTokenSecretName: vault-bootstrap
+  rootTokenSecretKey: rootToken
+  externalSecretsRoleNamespace: platform
+
+extraObjects: []

@@ -1,0 +1,13 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: postgresql-chart
+  namespace: database
+spec:
+  interval: 10m0s
+  url: oci://ghcr.io/x-evor/charts/postgresql
+  ref:
+    semver: "1.1.0"
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

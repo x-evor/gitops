@@ -1,4 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: caddy-ingress
@@ -7,7 +7,7 @@ spec:
   interval: 10m0s
   url: https://caddyserver.github.io/ingress/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: apisix
@@ -16,7 +16,16 @@ spec:
   interval: 10m0s
   url: https://charts.apiseven.com
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: hashicorp
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://helm.releases.hashicorp.com
+---
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: external-dns
@@ -25,7 +34,7 @@ spec:
   interval: 10m0s
   url: https://kubernetes-sigs.github.io/external-dns/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: external-secrets
@@ -34,7 +43,7 @@ spec:
   interval: 10m0s
   url: https://charts.external-secrets.io
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: stakater
@@ -42,4 +51,3 @@ metadata:
 spec:
   interval: 10m0s
   url: https://stakater.github.io/stakater-charts
-

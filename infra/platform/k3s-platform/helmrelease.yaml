@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: k3s-platform
+  namespace: platform
+spec:
+  interval: 10m0s
+  releaseName: k3s-platform
+  chartRef:
+    kind: OCIRepository
+    name: k3s-platform-chart
+    namespace: platform
+  valuesFrom:
+    - kind: ConfigMap
+      name: k3s-platform-values
+      valuesKey: values.yaml

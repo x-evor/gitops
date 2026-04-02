@@ -1,24 +1,16 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: accounts
 spec:
   interval: 5m0s
   releaseName: accounts
-  chart:
-    spec:
-      chart: ./helm/app-service
-      sourceRef:
-        kind: GitRepository
-        name: platform-config
-        namespace: flux-system
-      interval: 1m0s
+  chartRef:
+    kind: OCIRepository
+    name: accounts-chart
   valuesFrom:
     - kind: ConfigMap
       name: accounts-base-values
-      valuesKey: values.yaml
-    - kind: ConfigMap
-      name: accounts-channel-values
       valuesKey: values.yaml
     - kind: ConfigMap
       name: accounts-env-values

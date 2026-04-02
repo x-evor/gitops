@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: observability-stack
+  namespace: observability
+spec:
+  interval: 10m0s
+  releaseName: observability
+  chartRef:
+    kind: OCIRepository
+    name: observability-chart
+    namespace: observability
+  valuesFrom:
+    - kind: ConfigMap
+      name: observability-values
+      valuesKey: values.yaml

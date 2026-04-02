@@ -1,4 +1,7 @@
 replicaCount: 2
+image:
+  repository: ghcr.io/x-evor/accounts
+  tag: release
 resources:
   requests:
     cpu: 250m

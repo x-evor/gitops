@@ -1,4 +1,7 @@
 replicaCount: 1
+image:
+  repository: ghcr.io/x-evor/console
+  tag: latest
 resources:
   requests:
     cpu: 100m

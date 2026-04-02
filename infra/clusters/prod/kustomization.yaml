@@ -4,7 +4,7 @@ resources:
   - namespaces.yaml
   - platform-kustomization.yaml
   - infrastructure-kustomization.yaml
+  - observability-kustomization.yaml
   - console-prod-kustomization.yaml
   - accounts-prod-kustomization.yaml
   - pre-kustomization.yaml
-
