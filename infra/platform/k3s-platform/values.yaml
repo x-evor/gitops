@@ -40,16 +40,40 @@ components:
       dashboard:
         enabled: false
       gateway:
+        enabled: true
         type: ClusterIP
+      control:
+        enabled: false
       apisix:
         deployment:
+          mode: standalone
           role: traditional
           role_traditional:
             config_provider: yaml
-        standalone:
-          enabled: true
+          standalone:
+            config: |
+              routes:
+                - id: 1
+                  uri: "/*"
+                  hosts:
+                    - api.svc.plus
+                  name: api-gateway-prod
+                  upstream:
+                    type: roundrobin
+                    nodes:
+                      "accounts.core-prod.svc.cluster.local:80": 1
+                - id: 2
+                  uri: "/*"
+                  hosts:
+                    - api-pre.svc.plus
+                  name: api-gateway-pre
+                  upstream:
+                    type: roundrobin
+                    nodes:
+                      "accounts.core-pre.svc.cluster.local:80": 1
+              #END
         admin:
-          enabled: false
+          enabled: true
   vault:
     enabled: true
     releaseName: vault
