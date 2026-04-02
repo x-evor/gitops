@@ -17,7 +17,7 @@ spec:
         - name: postgresql-ghcr-pull
       containers:
         - name: stunnel-server
-          image: dweomer/stunnel:latest
+          image: ghcr.io/x-evor/postgresql.svc.plus/stunnel-server:latest
           imagePullPolicy: IfNotPresent
           command: ["stunnel", "/etc/stunnel/stunnel.conf"]
           ports:

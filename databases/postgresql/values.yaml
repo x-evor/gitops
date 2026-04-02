@@ -2,8 +2,8 @@ server:
   enabled: true
 
 image:
-  repository: postgres
-  tag: "17.9"
+  repository: ghcr.io/x-evor/postgresql.svc.plus/postgresql-svc-plus
+  tag: latest
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
@@ -54,7 +54,7 @@ stunnel:
 stunnelClient:
   enabled: false
   image:
-    repository: dweomer/stunnel
+    repository: ghcr.io/x-evor/postgresql.svc.plus/stunnel-client
     tag: latest
     pullPolicy: IfNotPresent
   service:
