@@ -3,7 +3,7 @@ server:
 
 image:
   repository: ghcr.io/x-evor/postgresql.svc.plus/postgresql-svc-plus
-  tag: latest
+  tag: "17"
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
