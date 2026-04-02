@@ -1,12 +1,12 @@
 # GitOps Repository Documentation
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 ## Current state snapshot
 
-- Root README title: `ansible-playbook`
+- Root README title: `Cloud-Neutral Toolkit GitOps`
 - Build/runtime evidence: repository structure and scripts only
-- Primary directories detected: `scripts/`, `StackFlow/`, `config/`
+- Primary directories detected: `infra/`, `apps/`, `clusters/`, `config/`, `scripts/`
 - Existing docs count: 3
 
 ## Canonical pages
@@ -20,6 +20,5 @@ This repository organizes GitOps assets, playbooks, and operational roles for in
 
 ## Legacy docs to fold in
 
-- `gpu-k8s-role.md`
 - `repo-structure.md`
 - `stackflow/README.md`

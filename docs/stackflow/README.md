@@ -1,10 +1,9 @@
 # StackFlow (GitOps YAML Flow)
 
 StackFlow is a declarative YAML describing a full business stack deployment
-across DNS, cloud resources (IAC), and Ansible-based provisioning.
+across DNS, cloud resources (IAC), and GitOps-driven delivery.
 
 This repository already contains:
-- `playbooks/` (Ansible provisioning for vhosts/docker/k3s)
 - `iac-template/` (Terraform reference templates)
 - `.github/workflows/` (bootstrap workflows)
 
@@ -27,7 +26,7 @@ Top-level:
 - `kind`: `StackFlow`
 - `metadata.name`: stack id
 - `global.domain`: root domain, e.g. `svc.plus`
-- `global.dns_provider`: `cloudflare` (planned), `alicloud` (existing playbooks)
+- `global.dns_provider`: `cloudflare` (planned), `alicloud` (legacy)
 - `global.cloud`: `gcp`
 - `targets[]`: list of deployable targets
 
@@ -52,7 +51,7 @@ Planned phases:
 - `dns-plan`: output required DNS records (no apply)
 - `dns-apply`: apply DNS changes (provider-specific)
 - `iac-apply`: provision resources via Terraform
-- `deploy`: deploy apps via Ansible or repo-dispatch
+- `deploy`: deploy apps via GitOps or repo-dispatch
 - `observe`: connect monitoring / alerts
 
 Today we only ship `validate` + `dns-plan` as the first step.

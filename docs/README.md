@@ -21,13 +21,12 @@ This `docs/` directory now has a bilingual canonical layer for the current repos
 
 ## Current Repo Context / 当前仓库背景
 
-- Root README: `ansible-playbook`
+- Root README: `Cloud-Neutral Toolkit GitOps`
 - Previous docs index: `Documentation`
 - Manifest evidence / 构建清单: repository structure and scripts only
-- Active code and ops directories / 当前主要目录: `scripts/`, `StackFlow/`, `config/`
+- Active code and ops directories / 当前主要目录: `infra/`, `apps/`, `clusters/`, `config/`, `scripts/`
 
 ## Existing Docs To Reconcile / 需要继续归并的现有文档
 
-- `gpu-k8s-role.md`
 - `repo-structure.md`
 - `stackflow/README.md`

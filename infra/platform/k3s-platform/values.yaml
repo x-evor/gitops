@@ -73,6 +73,59 @@ components:
                     type: roundrobin
                     nodes:
                       "accounts.core-pre.svc.cluster.local:80": 1
+  externalDns:
+    enabled: true
+    releaseName: external-dns
+    sourceRef:
+      kind: HelmRepository
+      name: external-dns
+      namespace: flux-system
+    chart:
+      name: external-dns
+      version: ">=1.14.0 <2.0.0"
+    secret:
+      name: cloudflare-api-token
+      refreshInterval: 1m
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: vault-platform
+      target:
+        name: cloudflare-api-token
+        creationPolicy: Owner
+      data:
+        secretKey: api-token
+        remoteRef:
+          key: platform/cloudflare
+          property: api-token
+    values:
+      provider: cloudflare
+      policy: sync
+      registry: txt
+      txtOwnerId: svc-plus-k3s
+      sources:
+        - ingress
+      domainFilters:
+        - svc.plus
+      env:
+        - name: CF_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-api-token
+              key: api-token
+  externalSecretsStore:
+    enabled: true
+    name: vault-platform
+    vault:
+      server: http://vault.extsvc.svc.cluster.local:8200
+      path: secret
+      version: v2
+      auth:
+        kubernetes:
+          mountPath: kubernetes
+          role: external-secrets
+          serviceAccountRef:
+            name: external-secrets
+            namespace: platform
   vault:
     enabled: true
     releaseName: vault

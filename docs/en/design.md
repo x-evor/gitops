@@ -1,6 +1,6 @@
 # Design
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 Use this page to consolidate design decisions, ADR-style tradeoffs, and roadmap-sensitive implementation notes.
 

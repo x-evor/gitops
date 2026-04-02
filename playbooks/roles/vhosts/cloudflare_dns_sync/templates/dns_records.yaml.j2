@@ -1,9 +1,0 @@
-{{ cloudflare_dns_sync_domain }}:
-{% for rec in cloudflare_dns_sync_records %}
-  - rr: "{{ rec.rr }}"
-    type: "{{ rec.type }}"
-    value: "{{ rec.value }}"
-    ttl: {{ rec.ttl | default(1) }}
-    proxied: {{ rec.proxied | default(false) }}
-{% endfor %}
-

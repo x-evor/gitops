@@ -1,6 +1,6 @@
 # Deployment
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 Use this page to standardize deployment prerequisites, supported topologies, operational checks, and rollback notes.
 

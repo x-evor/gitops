@@ -1,5 +1,0 @@
----
-haproxy_conf_dir: /etc/haproxy
-haproxy_user: root
-haproxy_group: root
-haproxy_reload_cmd: /etc/haproxy/scripts/reload.sh

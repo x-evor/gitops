@@ -1,6 +1,6 @@
 # User Guide
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 Use this page to document primary user/operator tasks, everyday workflows, and navigation to existing how-to material.
 

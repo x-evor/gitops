@@ -1,6 +1,6 @@
 # Developer Guide
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 Use this page to document local setup, project structure, test surfaces, and contribution conventions tied to the current codebase.
 

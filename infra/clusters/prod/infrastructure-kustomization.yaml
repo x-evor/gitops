@@ -13,4 +13,4 @@ spec:
     name: platform-config
   path: ./infra/infrastructure
   dependsOn:
-    - name: platform-secrets-stack
+    - name: platform-stack

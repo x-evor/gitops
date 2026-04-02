@@ -1,8 +1,0 @@
----
-cloudflare_dns_sync_domain: ""
-cloudflare_dns_sync_records: []
-cloudflare_dns_sync_output: "/tmp/dns_records.yaml"
-
-# Secret: set via extra-vars / env / vault; do not commit real values.
-cloudflare_api_token: ""
-

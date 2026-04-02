@@ -1,6 +1,6 @@
 # Architecture
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 Use this page as the canonical bilingual overview of system boundaries, major components, and repo ownership.
 

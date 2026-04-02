@@ -1,6 +1,6 @@
 # Vibe Coding Reference
 
-This repository organizes GitOps assets, playbooks, and operational roles for infrastructure delivery.
+This repository organizes declarative GitOps assets for infrastructure delivery.
 
 Use this page to align AI-assisted coding prompts, repo boundaries, safe edit rules, and documentation update expectations.
 
