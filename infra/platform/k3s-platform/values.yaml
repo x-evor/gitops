@@ -35,6 +35,8 @@ components:
     values:
       etcd:
         enabled: false
+      externalEtcd:
+        user: ""
       ingress-controller:
         enabled: false
       dashboard:
@@ -71,7 +73,6 @@ components:
                     type: roundrobin
                     nodes:
                       "accounts.core-pre.svc.cluster.local:80": 1
-              #END
         admin:
           enabled: true
   vault:
