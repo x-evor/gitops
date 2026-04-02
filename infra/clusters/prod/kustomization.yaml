@@ -8,3 +8,5 @@ resources:
   - console-prod-kustomization.yaml
   - accounts-prod-kustomization.yaml
   - pre-kustomization.yaml
+
+# Sync marker for Flux reconciliation on jp-k3s-vultr.svc.plus.
