@@ -13,4 +13,4 @@ spec:
     name: platform-config
   path: ./infra/observability
   dependsOn:
-    - name: platform-stack
+    - name: platform-k3s
