@@ -2,8 +2,8 @@ server:
   enabled: true
 
 image:
-  repository: ghcr.io/x-evor/postgresql.svc.plus/postgres-extensions
-  tag: latest
+  repository: postgres
+  tag: "17.9"
   pullPolicy: IfNotPresent
 
 auth:
@@ -51,7 +51,7 @@ stunnel:
 stunnelClient:
   enabled: false
   image:
-    repository: ghcr.io/x-evor/postgresql.svc.plus/stunnel-client
+    repository: dweomer/stunnel
     tag: latest
     pullPolicy: IfNotPresent
   service:

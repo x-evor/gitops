@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: stunnel-server
-          image: ghcr.io/x-evor/postgresql.svc.plus/stunnel-server:2330d36
+          image: dweomer/stunnel:latest
           imagePullPolicy: IfNotPresent
           command: ["stunnel", "/etc/stunnel/stunnel.conf"]
           ports:
