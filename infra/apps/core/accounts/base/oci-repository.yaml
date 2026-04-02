@@ -4,7 +4,7 @@ metadata:
   name: accounts-chart
 spec:
   interval: 10m0s
-  url: oci://ghcr.io/x-evor/app-service
+  url: oci://ghcr.io/x-evor/accounts-chart
   ref:
     semver: "0.1.0"
   layerSelector:

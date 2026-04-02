@@ -1,16 +1,17 @@
-replicaCount: 2
-image:
-  repository: ghcr.io/x-evor/console
-  tag: release
-resources:
-  requests:
-    cpu: 250m
-    memory: 256Mi
-  limits:
-    cpu: 1
-    memory: 768Mi
-pdb:
-  minAvailable: 1
-env:
-  APP_ENV: production
-  ACCOUNTS_BASE_URL: https://accounts.svc.plus
+service:
+  replicaCount: 2
+  global:
+    # Production consumes an explicitly published stable tag such as `release`.
+    tag: release
+    env:
+      APP_ENV: production
+      ACCOUNTS_BASE_URL: https://accounts.svc.plus
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 768Mi
+  pdb:
+    minAvailable: 1

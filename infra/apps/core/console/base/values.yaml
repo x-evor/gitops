@@ -1,22 +1,32 @@
-nameOverride: console
-containerPort: 3000
 service:
-  port: 80
-existingSecretName: console-env
-env:
-  PORT: "3000"
-  SERVICE_NAME: console
-  HEALTHCHECK_PATH: /healthz
-readinessProbe:
-  httpGet:
-    path: /healthz
-    port: http
-  initialDelaySeconds: 10
-  periodSeconds: 10
-livenessProbe:
-  httpGet:
-    path: /healthz
-    port: http
-  initialDelaySeconds: 30
-  periodSeconds: 20
-
+  nameOverride: console
+  containerPort: 3000
+  service:
+    port: 80
+  global:
+    existingSecretName: console-env
+    repository: ghcr.io/x-evor/console
+    # Preview tracks consume the rolling `latest` image from the repo-local GHCR build workflow.
+    tag: latest
+    env:
+      PORT: "3000"
+      SERVICE_NAME: console
+      HEALTHCHECK_PATH: /
+      DOCS_SERVICE_URL: https://docs.svc.plus
+      NEXT_PUBLIC_DOCS_BASE_URL: https://docs.svc.plus
+    external-service:
+      - docs.svc.plus
+      - xworkmate.svc.plus
+      - openclaw-gateway.svc.plus
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 10
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 30
+    periodSeconds: 20

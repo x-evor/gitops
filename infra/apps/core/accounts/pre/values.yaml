@@ -1,16 +1,16 @@
-replicaCount: 1
-image:
-  repository: ghcr.io/x-evor/accounts
-  tag: latest
-resources:
-  requests:
-    cpu: 100m
-    memory: 128Mi
-  limits:
-    cpu: 500m
-    memory: 384Mi
-pdb:
-  minAvailable: 1
-env:
-  APP_ENV: pre
-  DB_SCHEMA: core_pre
+service:
+  replicaCount: 1
+  global:
+    tag: latest
+    env:
+      APP_ENV: pre
+      DB_SCHEMA: core_pre
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 384Mi
+  pdb:
+    minAvailable: 1
