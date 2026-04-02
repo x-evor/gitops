@@ -1,16 +1,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: console-pre
+  name: database-stack
   namespace: flux-system
 spec:
   interval: 5m0s
   prune: true
   wait: true
+  timeout: 10m0s
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./apps/core/console/pre
+  path: ./databases/postgresql
   dependsOn:
     - name: platform-k3s
-    - name: accounts-pre

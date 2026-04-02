@@ -13,4 +13,3 @@ spec:
   path: ./infra/clusters/pre
   dependsOn:
     - name: platform-k3s
-    - name: infrastructure-stack

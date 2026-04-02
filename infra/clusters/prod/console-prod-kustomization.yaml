@@ -13,4 +13,4 @@ spec:
   path: ./apps/core/console/prod
   dependsOn:
     - name: platform-k3s
-    - name: infrastructure-stack
+    - name: accounts-prod

@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - namespaces.yaml
   - platform-kustomization.yaml
-  - infrastructure-kustomization.yaml
+  - database-kustomization.yaml
   - observability-kustomization.yaml
   - console-prod-kustomization.yaml
   - accounts-prod-kustomization.yaml
