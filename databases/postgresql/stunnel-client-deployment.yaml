@@ -13,6 +13,8 @@ spec:
       labels:
         app: postgresql-stunnel-client
     spec:
+      imagePullSecrets:
+        - name: postgresql-ghcr-pull
       containers:
         - name: stunnel-client
           image: dweomer/stunnel:latest

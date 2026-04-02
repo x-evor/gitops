@@ -6,6 +6,9 @@ image:
   tag: "17.9"
   pullPolicy: IfNotPresent
 
+imagePullSecrets:
+  - postgresql-ghcr-pull
+
 auth:
   username: postgres
   database: postgres
