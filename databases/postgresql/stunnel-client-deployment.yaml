@@ -7,11 +7,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgresql-stunnel-client
+      app.kubernetes.io/component: stunnel-client
+      app.kubernetes.io/instance: postgresql
+      app.kubernetes.io/name: postgresql
   template:
     metadata:
       labels:
         app: postgresql-stunnel-client
+        app.kubernetes.io/component: stunnel-client
+        app.kubernetes.io/instance: postgresql
+        app.kubernetes.io/name: postgresql
     spec:
       imagePullSecrets:
         - name: postgresql-ghcr-pull
