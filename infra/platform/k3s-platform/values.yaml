@@ -47,11 +47,11 @@ components:
       control:
         enabled: false
       apisix:
+        admin:
+          enabled: false
         deployment:
           mode: standalone
-          role: traditional
-          role_traditional:
-            config_provider: yaml
+          role: data_plane
           standalone:
             config: |
               routes:
@@ -73,8 +73,6 @@ components:
                     type: roundrobin
                     nodes:
                       "accounts.core-pre.svc.cluster.local:80": 1
-        admin:
-          enabled: true
   vault:
     enabled: true
     releaseName: vault
