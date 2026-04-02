@@ -9,6 +9,8 @@ resources:
   - stunnel-server-configmap.yaml
   - stunnel-server-deployment.yaml
   - stunnel-server-service.yaml
+  - stunnel-client-deployment.yaml
+  - stunnel-client-service.yaml
 configMapGenerator:
   - name: postgresql-values
     files:

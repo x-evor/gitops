@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-stunnel-client
+  namespace: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql-stunnel-client
+  template:
+    metadata:
+      labels:
+        app: postgresql-stunnel-client
+    spec:
+      containers:
+        - name: stunnel-client
+          image: dweomer/stunnel:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: STUNNEL_SERVICE
+              value: postgres-client
+            - name: STUNNEL_ACCEPT
+              value: "15432"
+            - name: STUNNEL_CONNECT
+              value: postgresql-stunnel-server.database.svc.cluster.local:5433
+            - name: STUNNEL_CRONTAB
+              value: ""
+          ports:
+            - containerPort: 15432
