@@ -11,4 +11,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./infra/platform
+  path: ./apps/platform

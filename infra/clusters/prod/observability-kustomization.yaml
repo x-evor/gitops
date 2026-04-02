@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./infra/observability
+  path: ./apps/monitor/observability-stack
   dependsOn:
     - name: platform-k3s

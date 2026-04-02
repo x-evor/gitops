@@ -10,7 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./infra/apps/core/console/prod
+  path: ./apps/core/console/prod
   dependsOn:
     - name: platform-k3s
     - name: infrastructure-stack

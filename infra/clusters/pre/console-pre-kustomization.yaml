@@ -10,4 +10,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./infra/apps/core/console/pre
+  path: ./apps/core/console/pre

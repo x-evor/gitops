@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./infra/infrastructure
+  path: ./databases/postgresql
   dependsOn:
     - name: platform-k3s
