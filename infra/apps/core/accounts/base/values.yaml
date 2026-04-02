@@ -1,0 +1,22 @@
+nameOverride: accounts
+containerPort: 8080
+service:
+  port: 80
+existingSecretName: accounts-env
+env:
+  PORT: "8080"
+  SERVICE_NAME: accounts
+  HEALTHCHECK_PATH: /healthz
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 20
+

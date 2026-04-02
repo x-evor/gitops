@@ -1,0 +1,39 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: database
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: postgresql
+      version: ">=15.0.0 <16.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    architecture: standalone
+    auth:
+      existingSecret: postgresql-auth
+    primary:
+      persistence:
+        enabled: true
+        size: 20Gi
+      extraVolumes:
+        - name: initdb
+          configMap:
+            name: postgresql-initdb
+      extraVolumeMounts:
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+    metrics:
+      enabled: false
+

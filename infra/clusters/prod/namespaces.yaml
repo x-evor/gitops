@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: database
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: extsvc
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: observability
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: core-prod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: core-pre
+

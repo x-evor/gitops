@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-initdb
+  namespace: database
+data:
+  01-core-schemas.sql: |
+    DO $$
+    BEGIN
+      IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'core_prod_user') THEN
+        CREATE ROLE core_prod_user LOGIN;
+      END IF;
+      IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'core_pre_user') THEN
+        CREATE ROLE core_pre_user LOGIN;
+      END IF;
+    END
+    $$;
+
+    CREATE SCHEMA IF NOT EXISTS core_prod AUTHORIZATION postgres;
+    CREATE SCHEMA IF NOT EXISTS core_pre AUTHORIZATION postgres;
+
+    GRANT USAGE ON SCHEMA core_prod TO core_prod_user;
+    GRANT USAGE ON SCHEMA core_pre TO core_pre_user;
+
+    ALTER DEFAULT PRIVILEGES IN SCHEMA core_prod
+      GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO core_prod_user;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA core_pre
+      GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO core_pre_user;

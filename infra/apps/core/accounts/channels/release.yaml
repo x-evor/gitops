@@ -1,0 +1,3 @@
+image:
+  repository: ghcr.io/x-evor/accounts
+  tag: release

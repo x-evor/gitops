@@ -114,3 +114,27 @@ targets:
       # Cloud Run custom domain mapping needs provider-specific verification records.
       # Keep explicit records here once known; plan/validate won't apply them.
       records: []
+
+  # -----------------------------------------
+  # Cloudflare Workers Containers: hk-xhttp
+  # -----------------------------------------
+  - id: hk-xhttp
+    type: cloudflare-workers-containers
+    cloud: cloudflare
+    repo: https://github.com/cloud-neutral-toolkit/iac_modules
+    cloudflare:
+      account_id: e71be5efb76a6c54f78f008da4404f00
+      worker_name: hk-xhttp-svc-plus
+      dashboard_url: https://dash.cloudflare.com/e71be5efb76a6c54f78f008da4404f00/workers-and-pages
+    domains:
+      - xhttp.svc.plus
+    deploy:
+      mode: wrangler
+      working_directory: vpn-overlay/xray/cloudflare-workers-containers
+      command: npx wrangler deploy
+    dns:
+      records:
+        - name: xhttp
+          type: CNAME
+          value: hk-xhttp-svc-plus.workers.dev.
+          proxied: true

@@ -1,0 +1,45 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: caddy-ingress
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://caddyserver.github.io/ingress/
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: apisix
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://charts.apiseven.com
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: external-dns
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://kubernetes-sigs.github.io/external-dns/
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: external-secrets
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://charts.external-secrets.io
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: stakater
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://stakater.github.io/stakater-charts
+

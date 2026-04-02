@@ -1,0 +1,13 @@
+replicaCount: 1
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 384Mi
+pdb:
+  minAvailable: 1
+env:
+  APP_ENV: pre
+  ACCOUNTS_BASE_URL: https://accounts-pre.svc.plus
