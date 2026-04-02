@@ -8,6 +8,7 @@ resources:
   - ghcr-pull-externalsecret.yaml
   - stunnel-externalsecret.yaml
   - stunnel-server-configmap.yaml
+  - stunnel-client-configmap.yaml
   - stunnel-server-deployment.yaml
   - stunnel-server-service.yaml
   - stunnel-client-deployment.yaml

@@ -24,14 +24,13 @@ spec:
         - name: stunnel-client
           image: ghcr.io/x-evor/postgresql.svc.plus/stunnel-client:latest
           imagePullPolicy: IfNotPresent
-          env:
-            - name: STUNNEL_SERVICE
-              value: postgres-client
-            - name: STUNNEL_ACCEPT
-              value: "15432"
-            - name: STUNNEL_CONNECT
-              value: postgresql-stunnel-server.database.svc.cluster.local:5433
-            - name: STUNNEL_CRONTAB
-              value: ""
           ports:
             - containerPort: 15432
+          volumeMounts:
+            - name: stunnel-config
+              mountPath: /etc/stunnel/stunnel.conf
+              subPath: stunnel.conf
+      volumes:
+        - name: stunnel-config
+          configMap:
+            name: postgresql-stunnel-client
