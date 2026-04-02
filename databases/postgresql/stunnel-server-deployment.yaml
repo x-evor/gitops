@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-stunnel-server
+  namespace: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql-stunnel-server
+  template:
+    metadata:
+      labels:
+        app: postgresql-stunnel-server
+    spec:
+      containers:
+        - name: stunnel-server
+          image: ghcr.io/x-evor/stunnel-server:2330d36
+          imagePullPolicy: IfNotPresent
+          command: ["stunnel", "/etc/stunnel/stunnel.conf"]
+          ports:
+            - containerPort: 5433
+          volumeMounts:
+            - name: stunnel-conf
+              mountPath: /etc/stunnel/stunnel.conf
+              subPath: stunnel.conf
+            - name: stunnel-cert
+              mountPath: /etc/stunnel/certs/server-cert.pem
+              subPath: server-cert.pem
+            - name: stunnel-key
+              mountPath: /etc/stunnel/certs/server-key.pem
+              subPath: server-key.pem
+      volumes:
+        - name: stunnel-conf
+          configMap:
+            name: postgresql-stunnel-server
+        - name: stunnel-cert
+          secret:
+            secretName: postgresql-stunnel-server
+            items:
+              - key: server-cert.pem
+                path: server-cert.pem
+        - name: stunnel-key
+          secret:
+            secretName: postgresql-stunnel-server
+            items:
+              - key: server-key.pem
+                path: server-key.pem

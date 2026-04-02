@@ -6,6 +6,9 @@ resources:
   - helmrelease.yaml
   - externalsecret.yaml
   - stunnel-externalsecret.yaml
+  - stunnel-server-configmap.yaml
+  - stunnel-server-deployment.yaml
+  - stunnel-server-service.yaml
 configMapGenerator:
   - name: postgresql-values
     files:

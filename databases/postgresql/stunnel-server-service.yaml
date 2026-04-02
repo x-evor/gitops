@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-stunnel-server
+  namespace: database
+spec:
+  selector:
+    app: postgresql-stunnel-server
+  ports:
+    - name: tls
+      port: 5433
+      targetPort: 5433

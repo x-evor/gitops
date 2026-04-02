@@ -46,13 +46,7 @@ metrics:
   enabled: false
 
 stunnel:
-  enabled: true
-  image:
-    repository: ghcr.io/x-evor/stunnel-server
-    tag: "2330d36"
-    pullPolicy: IfNotPresent
-  port: 5433
-  certificatesSecret: postgresql-stunnel-server
+  enabled: false
 
 stunnelClient:
   enabled: true
@@ -66,7 +60,7 @@ stunnelClient:
     [postgres-client]
     client = yes
     accept = 0.0.0.0:15432
-    connect = postgresql.database.svc.cluster.local:5433
+    connect = postgresql-stunnel-server.database.svc.cluster.local:5433
     verifyChain = no
     sslVersion = TLSv1.2
     options = NO_SSLv2
