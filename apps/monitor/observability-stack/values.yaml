@@ -17,6 +17,8 @@ server:
         persistentVolume:
           enabled: true
           size: 20Gi
+      prometheus-node-exporter:
+        enabled: false
   victoriaMetrics:
     enabled: true
     releaseName: victoria-metrics
@@ -69,6 +71,13 @@ server:
       name: grafana
       version: ">=8.0.0 <9.0.0"
     values:
+      initChownData:
+        enabled: false
+      podSecurityContext:
+        fsGroup: 472
+      securityContext:
+        runAsUser: 472
+        runAsGroup: 472
       persistence:
         enabled: true
         size: 10Gi
@@ -83,6 +92,8 @@ server:
       name: opentelemetry-collector
       version: ">=0.104.0 <1.0.0"
     values:
+      image:
+        repository: otel/opentelemetry-collector-contrib
       mode: deployment
       config:
         receivers:
@@ -158,6 +169,11 @@ agent:
       requests:
         cpu: 100m
         memory: 128Mi
+    volume:
+      enabled: true
+      name: vector-data-dir
+      mountPath: /vector-data-dir
+      sizeLimit: 1Gi
   processExporter:
     enabled: true
     image:
