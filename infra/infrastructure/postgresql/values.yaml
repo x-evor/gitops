@@ -53,11 +53,11 @@ stunnel:
 stunnelClient:
   enabled: true
   service:
-    port: 5432
+    port: 15432
   config: |
     [postgres-client]
     client = yes
-    accept = 0.0.0.0:5432
+    accept = 0.0.0.0:15432
     connect = postgresql.database.svc.cluster.local:5433
     verifyChain = no
     sslVersion = TLSv1.2

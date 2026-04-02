@@ -44,8 +44,8 @@ components:
       apisix:
         deployment:
           role: traditional
-          roleTraditional:
-            configProvider: yaml
+          role_traditional:
+            config_provider: yaml
         standalone:
           enabled: true
         admin:
