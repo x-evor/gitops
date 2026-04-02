@@ -47,11 +47,19 @@ metrics:
 
 stunnel:
   enabled: true
+  image:
+    repository: ghcr.io/x-evor/stunnel-server
+    tag: "2330d36"
+    pullPolicy: IfNotPresent
   port: 5433
   certificatesSecret: postgresql-stunnel-server
 
 stunnelClient:
   enabled: true
+  image:
+    repository: dweomer/stunnel
+    tag: latest
+    pullPolicy: IfNotPresent
   service:
     port: 15432
   config: |
