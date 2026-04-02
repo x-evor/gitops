@@ -61,7 +61,7 @@ server:
       version: ">=0.0.1 <1.0.0"
     values: {}
   grafana:
-    enabled: true
+    enabled: false
     releaseName: grafana
     sourceRef:
       kind: HelmRepository
@@ -82,7 +82,7 @@ server:
         enabled: true
         size: 10Gi
   otelConnector:
-    enabled: true
+    enabled: false
     releaseName: otel-connector
     sourceRef:
       kind: HelmRepository
