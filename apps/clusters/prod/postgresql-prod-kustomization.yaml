@@ -11,4 +11,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./databases/postgresql-core
+  path: ./services/database/postgresql-core

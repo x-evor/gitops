@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./databases/stunnel-server
+  path: ./services/database/stunnel-server
   dependsOn:
     - name: postgresql-prod
