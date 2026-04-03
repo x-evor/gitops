@@ -83,20 +83,6 @@ components:
     chart:
       name: external-dns
       version: ">=1.14.0 <2.0.0"
-    secret:
-      name: cloudflare-api-token
-      refreshInterval: 1m
-      secretStoreRef:
-        kind: ClusterSecretStore
-        name: vault-platform
-      target:
-        name: cloudflare-api-token
-        creationPolicy: Owner
-      data:
-        secretKey: api-token
-        remoteRef:
-          key: platform/cloudflare
-          property: api-token
     values:
       provider: cloudflare
       policy: sync
@@ -113,8 +99,7 @@ components:
               name: cloudflare-api-token
               key: api-token
   externalSecretsStore:
-    enabled: true
-    name: vault-platform
+    enabled: false
     vault:
       server: http://vault.extsvc.svc.cluster.local:8200
       path: secret
@@ -126,8 +111,16 @@ components:
           serviceAccountRef:
             name: external-secrets
             namespace: platform
-  vault:
+  sharedTlsSecretSync:
     enabled: true
+    name: postgresql-vultr-tls-sync
+    sourceNamespace: platform
+    sourceSecretName: postgresql-vultr-tls
+    targetNamespace: database
+    targetSecretName: postgresql-vultr-tls
+    refreshSchedule: "*/5 * * * *"
+  vault:
+    enabled: false
     releaseName: vault
     sourceRef:
       kind: HelmRepository
@@ -175,7 +168,7 @@ apisixIngress:
       servicePort: 80
 
 vaultBootstrap:
-  enabled: true
+  enabled: false
   image: hashicorp/vault:1.16.3
   serviceAccountName: vault-bootstrap
   cloudflareSecretName: vault-bootstrap

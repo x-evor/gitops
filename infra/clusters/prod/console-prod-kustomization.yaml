@@ -12,5 +12,4 @@ spec:
     name: platform-config
   path: ./apps/core/console/prod
   dependsOn:
-    - name: platform-k3s
     - name: accounts-prod

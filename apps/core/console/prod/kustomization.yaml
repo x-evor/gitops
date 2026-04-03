@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: core-prod
 resources:
   - ../base
-  - externalsecret.yaml
   - ingress.yaml
 configMapGenerator:
   - name: console-env-values

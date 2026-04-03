@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: core-pre
 resources:
   - ../base
-  - externalsecret.yaml
   - ingress.yaml
 configMapGenerator:
   - name: accounts-env-values

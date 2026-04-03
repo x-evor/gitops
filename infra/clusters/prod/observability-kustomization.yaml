@@ -12,5 +12,3 @@ spec:
     kind: GitRepository
     name: platform-config
   path: ./apps/monitor/observability-stack
-  dependsOn:
-    - name: platform-k3s

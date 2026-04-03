@@ -4,9 +4,6 @@ namespace: database
 resources:
   - oci-repository.yaml
   - helmrelease.yaml
-  - externalsecret.yaml
-  - ghcr-pull-externalsecret.yaml
-  - stunnel-externalsecret.yaml
   - stunnel-server-configmap.yaml
   - stunnel-client-configmap.yaml
   - stunnel-server-deployment.yaml

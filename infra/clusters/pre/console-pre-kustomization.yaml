@@ -12,5 +12,4 @@ spec:
     name: platform-config
   path: ./apps/core/console/pre
   dependsOn:
-    - name: platform-k3s
     - name: accounts-pre

@@ -12,5 +12,4 @@ spec:
     name: platform-config
   path: ./apps/core/accounts/prod
   dependsOn:
-    - name: platform-k3s
     - name: database-stack
