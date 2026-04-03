@@ -1,0 +1,15 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: console-pre
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: platform-config
+  path: ./services/console/pre
+  dependsOn:
+    - name: accounts-pre

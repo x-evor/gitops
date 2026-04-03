@@ -1,0 +1,15 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: accounts-prod
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: platform-config
+  path: ./services/accounts/prod
+  dependsOn:
+    - name: stunnel-client-prod

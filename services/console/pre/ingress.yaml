@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: console
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: console-pre.svc.plus
+spec:
+  ingressClassName: caddy
+  tls:
+    - hosts:
+        - console-pre.svc.plus
+      secretName: console-pre-tls
+  rules:
+    - host: console-pre.svc.plus
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: console
+                port:
+                  number: 80
