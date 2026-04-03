@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./apps/core/stunnel-client/prod
+  path: ./services/stunnel-client/prod
   dependsOn:
     - name: stunnel-server
