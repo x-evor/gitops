@@ -22,5 +22,5 @@ directory. Otherwise the ExternalSecrets controller will report
 Use `scripts/seed-vault-postgresql.sh` from a trusted admin shell to write the
 expected Vault keys from local environment variables or existing K8s Secrets.
 The shared TLS Secret for `postgresql-vultr.svc.plus` is synchronized by the
-`k3s-platform` Helm chart into `database/postgresql-vultr-tls`, which
+`k3s-platform` Helm chart into `database/postgresql-tls`, which
 `stunnel-server` consumes directly. Do not commit the secret values to Git.

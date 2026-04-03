@@ -37,13 +37,13 @@ spec:
             name: postgresql-stunnel-server
         - name: stunnel-cert
           secret:
-            secretName: postgresql-vultr-tls
+            secretName: postgresql-tls
             items:
               - key: tls.crt
                 path: server-cert.pem
         - name: stunnel-key
           secret:
-            secretName: postgresql-vultr-tls
+            secretName: postgresql-tls
             items:
               - key: tls.key
                 path: server-key.pem
