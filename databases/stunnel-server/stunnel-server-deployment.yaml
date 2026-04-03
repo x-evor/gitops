@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql-stunnel-server
-  namespace: database
 spec:
   replicas: 1
   selector:

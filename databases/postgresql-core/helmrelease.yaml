@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: database
+spec:
+  interval: 10m0s
+  releaseName: postgresql
+  chartRef:
+    kind: OCIRepository
+    name: postgresql-chart
+    namespace: database
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  valuesFrom:
+    - kind: ConfigMap
+      name: postgresql-values
+      valuesKey: values.yaml

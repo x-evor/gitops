@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-stunnel-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql-stunnel-client
+  template:
+    metadata:
+      labels:
+        app: postgresql-stunnel-client
+    spec:
+      imagePullSecrets:
+        - name: postgresql-ghcr-pull
+      containers:
+        - name: stunnel-client
+          image: ghcr.io/x-evor/postgresql.svc.plus/stunnel-client:latest
+          imagePullPolicy: IfNotPresent
+          command: ["stunnel", "/etc/stunnel/stunnel.conf"]
+          ports:
+            - containerPort: 15432
+          volumeMounts:
+            - name: stunnel-config
+              mountPath: /etc/stunnel/stunnel.conf
+              subPath: stunnel.conf
+      volumes:
+        - name: stunnel-config
+          configMap:
+            name: postgresql-stunnel-client

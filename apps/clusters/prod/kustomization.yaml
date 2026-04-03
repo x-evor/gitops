@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespaces.yaml
+  - postgresql-prod-kustomization.yaml
+  - stunnel-server-kustomization.yaml
+  - stunnel-client-prod-kustomization.yaml
+  - console-prod-kustomization.yaml
+  - accounts-prod-kustomization.yaml
+  - observability-kustomization.yaml
+  - pre-kustomization.yaml
+
+# Sync marker for Flux reconciliation on jp-k3s-vultr.svc.plus.

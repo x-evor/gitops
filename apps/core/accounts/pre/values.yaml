@@ -1,6 +1,7 @@
 service:
   replicaCount: 1
   global:
+    imagePullPolicy: Always
     tag: latest
     env:
       APP_ENV: pre

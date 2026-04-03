@@ -6,6 +6,9 @@ metadata:
 spec:
   interval: 10m0s
   releaseName: k3s-platform
+  dependsOn:
+    - name: external-secrets
+      namespace: platform
   chartRef:
     kind: OCIRepository
     name: k3s-platform-chart

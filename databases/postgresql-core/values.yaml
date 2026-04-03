@@ -1,0 +1,55 @@
+server:
+  enabled: true
+
+image:
+  repository: ghcr.io/x-evor/postgresql.svc.plus/postgresql-svc-plus
+  tag: "17"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: postgresql-ghcr-pull
+
+auth:
+  username: postgres
+  database: postgres
+  existingSecret: postgresql-auth
+  secretKey: password
+
+initScripts:
+  enabled: true
+  scripts:
+    01-core-schemas.sql: |
+      DO $$
+      BEGIN
+        IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'core_prod_user') THEN
+          CREATE ROLE core_prod_user LOGIN;
+        END IF;
+        IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'core_pre_user') THEN
+          CREATE ROLE core_pre_user LOGIN;
+        END IF;
+      END
+      $$;
+
+      CREATE SCHEMA IF NOT EXISTS core_prod AUTHORIZATION postgres;
+      CREATE SCHEMA IF NOT EXISTS core_pre AUTHORIZATION postgres;
+
+      GRANT USAGE ON SCHEMA core_prod TO core_prod_user;
+      GRANT USAGE ON SCHEMA core_pre TO core_pre_user;
+
+      ALTER DEFAULT PRIVILEGES IN SCHEMA core_prod
+        GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO core_prod_user;
+      ALTER DEFAULT PRIVILEGES IN SCHEMA core_pre
+        GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO core_pre_user;
+
+persistence:
+  enabled: true
+  size: 20Gi
+
+metrics:
+  enabled: false
+
+stunnel:
+  enabled: false
+
+stunnelClient:
+  enabled: false
