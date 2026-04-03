@@ -3,7 +3,7 @@ server:
 
 image:
   repository: ghcr.io/x-evor/images/postgresql
-  tag: "17"
+  tag: "sha-8d3a508"
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
