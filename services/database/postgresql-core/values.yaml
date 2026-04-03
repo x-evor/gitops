@@ -13,7 +13,7 @@ auth:
   username: postgres
   database: postgres
   existingSecret: postgresql-auth
-  secretKey: password
+  secretKey: POSTGRES_PASSWORD
 
 initScripts:
   enabled: true
