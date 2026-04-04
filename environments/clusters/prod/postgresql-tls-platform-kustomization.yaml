@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: stunnel-server
+  name: postgresql-tls-platform
   namespace: flux-system
 spec:
   interval: 5m0s
@@ -11,7 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./services/database/stunnel-server
+  path: ./services/platform/postgresql-tls
   dependsOn:
-    - name: postgresql-tls-database
-    - name: postgresql-prod
+    - name: cert-manager-issuer

@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: postgresql-tls
+  namespace: platform
+spec:
+  secretName: postgresql-tls
+  commonName: postgresql-prod.svc.plus
+  dnsNames:
+    - postgresql-prod.svc.plus
+  issuerRef:
+    name: svc-plus-selfsigned
+    kind: ClusterIssuer
+    group: cert-manager.io

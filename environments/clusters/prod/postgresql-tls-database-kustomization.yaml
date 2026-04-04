@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: postgresql-tls-sync
+  name: postgresql-tls-database
   namespace: flux-system
 spec:
   interval: 5m0s
@@ -11,4 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: platform-config
-  path: ./services/platform/postgresql-tls-sync
+  path: ./services/database/postgresql-tls
+  dependsOn:
+    - name: cert-manager-issuer

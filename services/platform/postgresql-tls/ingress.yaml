@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: postgresql-tls
+  namespace: platform
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: postgresql-prod.svc.plus
+spec:
+  ingressClassName: caddy
+  tls:
+    - hosts:
+        - postgresql-prod.svc.plus
+      secretName: postgresql-tls
+  rules:
+    - host: postgresql-prod.svc.plus
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: postgresql-tls-placeholder
+                port:
+                  number: 80

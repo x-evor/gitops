@@ -2,7 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespaces.yaml
-  - postgresql-tls-sync-kustomization.yaml
+  - cert-manager-kustomization.yaml
+  - postgresql-tls-platform-kustomization.yaml
+  - postgresql-tls-database-kustomization.yaml
   - postgresql-prod-kustomization.yaml
   - stunnel-server-kustomization.yaml
   - stunnel-client-prod-kustomization.yaml
@@ -10,4 +12,4 @@ resources:
   - accounts-prod-kustomization.yaml
   - observability-kustomization.yaml
 
-# Sync marker for Flux reconciliation on postgresql-prod.svc.plus.
+# cert-manager owns postgresql-tls in each namespace; no cross-namespace sync job.
