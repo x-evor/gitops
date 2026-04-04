@@ -1,0 +1,120 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-tls-placeholder
+  namespace: platform
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: postgresql-tls-placeholder
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: postgresql-tls
+  namespace: platform
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: postgresql-prod.svc.plus
+spec:
+  ingressClassName: caddy
+  tls:
+    - hosts:
+        - postgresql-prod.svc.plus
+      secretName: postgresql-tls
+  rules:
+    - host: postgresql-prod.svc.plus
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: postgresql-tls-placeholder
+                port:
+                  number: 80
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: postgresql-tls-sync
+  namespace: platform
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: postgresql-tls-sync-source
+  namespace: platform
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["postgresql-tls"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: postgresql-tls-sync-target
+  namespace: database
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["postgresql-tls"]
+    verbs: ["get", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: postgresql-tls-sync-source
+  namespace: platform
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: postgresql-tls-sync-source
+subjects:
+  - kind: ServiceAccount
+    name: postgresql-tls-sync
+    namespace: platform
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: postgresql-tls-sync-target
+  namespace: database
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: postgresql-tls-sync-target
+subjects:
+  - kind: ServiceAccount
+    name: postgresql-tls-sync
+    namespace: platform
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgresql-tls-sync
+  namespace: platform
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: postgresql-tls-sync
+          restartPolicy: OnFailure
+          containers:
+            - name: sync
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -ec
+                - |
+                  kubectl -n platform get secret postgresql-tls -o yaml \
+                    | sed '/^  resourceVersion:/d;/^  uid:/d;/^  creationTimestamp:/d;/^  managedFields:/d;/^  annotations:/d;/^  ownerReferences:/d;/^  namespace:/d;/^  selfLink:/d' \
+                    | kubectl -n database apply -f -
