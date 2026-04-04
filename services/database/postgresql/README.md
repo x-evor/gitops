@@ -30,3 +30,10 @@ Default certificate issuance uses ACME HTTP-01 through the `caddy` ingress
 class. A DNS-01 Cloudflare issuer is predeclared for future wildcard and
 additional subdomain certificates, and `selfSigned` remains available for
 internal temporary or fallback use.
+
+The boundary is intentionally narrow:
+
+- `cert-manager` owns the TLS Secret lifecycle
+- `Caddy` provides ingress routing and HTTP-01 challenge reachability
+- `external-dns` only reconciles DNS records
+- `external-secrets` continues to manage Vault-backed runtime secrets
