@@ -4,3 +4,35 @@ metadata:
   name: svc-plus-selfsigned
 spec:
   selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: svc-plus-acme-http01
+spec:
+  acme:
+    email: manbuzhe2009@qq.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: svc-plus-acme-http01-account-key
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: caddy
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: svc-plus-acme-dns01-cloudflare
+spec:
+  acme:
+    email: manbuzhe2009@qq.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: svc-plus-acme-dns01-cloudflare-account-key
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token

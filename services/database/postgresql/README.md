@@ -24,5 +24,9 @@ expected Vault keys from local environment variables or existing K8s Secrets.
 The ingress domain is `postgresql-prod.svc.plus` for this prod cluster. TLS for
 `postgresql-tls` is now owned directly by cert-manager in both the `platform`
 and `database` namespaces, so `stunnel-server` can mount the database-local
-Secret without any cross-namespace sync job. Do not commit the secret values to
-Git.
+Secret without any cross-namespace sync job.
+
+Default certificate issuance uses ACME HTTP-01 through the `caddy` ingress
+class. A DNS-01 Cloudflare issuer is predeclared for future wildcard and
+additional subdomain certificates, and `selfSigned` remains available for
+internal temporary or fallback use.
