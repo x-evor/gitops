@@ -100,7 +100,7 @@ metadata:
   name: postgresql-tls-sync
   namespace: platform
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "* * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
